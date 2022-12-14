@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 ## SageMath version 9.5
 #load("main.sage")
-load("my_plot_3.sage")
 import time
 import numpy as np
 def randint_par(n):
