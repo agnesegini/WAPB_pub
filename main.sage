@@ -18,8 +18,8 @@ def ithp(n,v):
 #loading functions
 load("supp_prop.sage")# indication functions, supports, verification WPB,WAPB and SWAPB
 load("nlk.sage")#computing NLk both sequential and parallel 
-load("constructions.sage")#WAPB constuctions from the paper 
+load("GM22b/constructions_GM22b.sage")#WAPB constuctions from the paper 
 load("cmr.sage")#building CMR functions
 load("LM-fun.sage")#building LM functions
-load("hybrid16.sage")#building h16 hybrid function
-load("data_collect.sage")#statistics/ printing tables 
+load("GM22b/hybrid16.sage")#building h16 hybrid function
+load("GM22b/data_collect.sage")#statistics/ printing tables 
