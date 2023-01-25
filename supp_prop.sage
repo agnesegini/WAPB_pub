@@ -123,16 +123,16 @@ def is_WAPB(f):
 
 #returns True if f is WPB; False otherwise. 
 #verification done via supports computation
-def is_WPB(f,verbose='False'):
+def is_WPB(f,verbose=False):
   n=f.nvariables()
   assert n%2==0 and n.is_prime_power(), "not a power of 2!"
   fT=f.truth_table(format='int')
-  if fT[0] or not fT[-1]: return False
+  if fT[0] or not fT[-1]: return False,(0,n)
   for k in range(1,n):
     if verbose: print(k)
     b=binomial(n,k)
-    if size_suppk(f,k)!=b/2: return False
-  return True
+    if size_suppk(f,k)!=b/2: return False,k
+  return True,True
 
 #returns True if f is WAPB; False otherwise. 
 #verification done via supports computation
