@@ -11,7 +11,7 @@ def get_NL_from_file(infile):
   S=[int(a) for a in s0 ]
   return S
   
-def tot(m):
+def tot_NL(m):
   if m==4: n=32768
   if m==3: n=128
   V=vector(ZZ,n)
@@ -21,7 +21,7 @@ def tot(m):
     if file[-1]=='t':
           V+=vector(ZZ,get_NL_from_file(file))      
   return V
-  
+"""   
 def table(L,  cols=14):
   V=vector(ZZ,L)
   l=len(L)
@@ -60,4 +60,4 @@ def propD(L):
   expect=sum([i*Y[i] for i in range(l)])
   mode=list(L).index(max(L))
   print(expect, mode)
-  
+"""  
