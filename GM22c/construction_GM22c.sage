@@ -7,6 +7,18 @@ def elem_2(n):
     for j in range(i):
      f+=R('x%d*x%d' %(i,j))
   return f
+  
+def elem_symm(d,n):
+  R=BooleanPolynomialRing(names=['x'+str(i) for i in range(n)])
+  f=R(0)
+  for ind in ithp(n,d):
+     s='x%d'+(d-1)*'*x%d'
+     f+=R(s %ind)
+  return f    
+
+def ell_half(n):
+  R=BooleanPolynomialRing(names=['x'+str(i) for i in range(n)])
+  return sum([R('x%d' %i) for i in range(0,n//2)])    
       
 def magic(n):
   R=BooleanPolynomialRing(names=['x'+str(i) for i in range(n)])
@@ -18,6 +30,13 @@ def magic(n):
 
 def comp(f,n):
   return sum([abs(walsh_tr_0(f,Ekn(i,n))) for i in range(n+1)])
+
+def NPB(f):
+   n=f.nvariables()
+   o=(2-walsh_tr_0(f,Ekn(0,n))+walsh_tr_0(f,Ekn(n,n)))
+   t=sum([abs(walsh_tr_0(f,Ekn(i,n))) for i in range(1,n)])
+   return (t+o)/2
+
 
 def countm(n):
    f=magic(n)
@@ -50,7 +69,7 @@ def upmagic(n):
   nly=y.nonlinearity()
   print(nly,wpb)
   #print(L)
-  return nly#,y
+  return nly,y
 
 
 
@@ -76,7 +95,7 @@ def upmagic_rand(n):
   nly=y.nonlinearity()
   print(nly,wpb)
   #if nly>=116: print(flipped)
-  return nly, flipped#, y
+  return nly, flipped, y
   
   
   
@@ -90,7 +109,7 @@ def collection(n,d,outfile):
     f.write("n: "+str(n)+'\n')     
     stat={ 0: 0 }
     for i in range(d):
-        nly, flipped=upmagic_rand(n)
+        nly, flipped, y =upmagic_rand(n)
         if nly in stat: stat[nly]+=1
         else: stat[nly]=1
         if nly>=B: 
@@ -99,6 +118,32 @@ def collection(n,d,outfile):
     f.close()
     
     
-#collection(16,50,'mer-new.txt')
 
-  
+def construction1_GM22c(seed,verbose=False):
+  n=seed.nvariables()
+  FT=seed.truth_table('int')
+  N=list(FT)
+  N[0]=0
+  N[-1]=1
+  wpb, t =is_WPB(BooleanFunction(N))
+  flipped={ 0: [0], n: [0] }
+  while not wpb :
+    E=Ekn(t,n)
+    o=walsh_tr_0(seed,E)//2
+    S=suppk(seed,t)
+    if verbose: print(t,o)
+    if o>0:
+      CS = [x for x in E if x not in S] 
+      O=random.sample(CS, o)
+      for i in O:
+        N[i]=1
+    else:
+      O=random.sample(S, -o)
+      for i in O:
+        N[i]=0
+    flipped[t]=O  
+    y=BooleanFunction(N)
+    wpb, t =is_WPB(y) 
+  nly=y.nonlinearity()
+  return  y,flipped
+    
