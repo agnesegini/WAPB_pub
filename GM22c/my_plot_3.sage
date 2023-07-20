@@ -33,3 +33,6 @@ def plot_dist_NL(L,col=green,title='',fig_name='temp.eps'):
   plt.xlabel('x')
   plt.savefig( fig_name,format='eps')
   plt.close()    
+  
+  
+    

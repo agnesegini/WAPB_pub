@@ -7,19 +7,19 @@ def elem_2(n):
     for j in range(i):
      f+=R('x%d*x%d' %(i,j))
   return f
-  
+      
 def elem_symm(d,n):
   R=BooleanPolynomialRing(names=['x'+str(i) for i in range(n)])
   f=R(0)
   for ind in ithp(n,d):
      s='x%d'+(d-1)*'*x%d'
      f+=R(s %ind)
-  return f    
-
+  return f      
+      
 def ell_half(n):
   R=BooleanPolynomialRing(names=['x'+str(i) for i in range(n)])
   return sum([R('x%d' %i) for i in range(0,n//2)])    
-      
+
 def magic(n):
   R=BooleanPolynomialRing(names=['x'+str(i) for i in range(n)])
   f=sum([R('x%d' %i) for i in range(0,n//2)])
@@ -146,4 +146,4 @@ def construction1_GM22c(seed,verbose=False):
     wpb, t =is_WPB(y) 
   nly=y.nonlinearity()
   return  y,flipped
-    
+  
