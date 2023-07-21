@@ -1,5 +1,6 @@
-#!/usr/bin/python3
 ## SageMath version 9.5
+
+
 
 ##Modules
 from sage.crypto.boolean_function import BooleanFunction
@@ -14,13 +15,8 @@ from datetime import datetime
 def now():
    return '{:%Y-%m-%d-%H:%M:%S}'.format(datetime.now())
 
-
-#returns an iterator over the v length subsequences of range(n) (lex ordering)
-def ithp(n,v):
-  return itertools.combinations(range(n), v)
-
-#loading functions
-load("supp_prop.sage")# indication functions, supports, verification WPB,WAPB and SWAPB
+#loading modules
+load("supp_prop.sage")# indicator functions, supports, verification WPB,WAPB and SWAPB
 load("nlk.sage")#computing NLk both sequential and parallel 
 load("AI.sage")#compute algebraic immunity using the uppbound n/2 
 
@@ -42,3 +38,19 @@ load("GM23/uptosymm.sage")
 load("GM23/get_all.sage")
 load("GM23/porcelain.sage")
 
+
+def ithp(n,v):
+  """returns an iterator over the v length subsequences of range(n) (lex ordering)"""
+  return itertools.combinations(range(n), v)
+
+
+
+def hw(x):
+   """Compute the hamming weight of a vector x"""
+   x=vector(ZZ,x)
+   w=vector(ones_matrix(ZZ,1,len(x)))
+   return w*x
+   
+def h_dist(c,r):
+   """Returns the hamming distance of the F2's vectors c and r """
+   return hw(c+r)
