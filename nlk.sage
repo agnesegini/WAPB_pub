@@ -115,4 +115,3 @@ def NLk_w(k,f):
     b=binomial(n,k)
     w=max([abs(walsh(f,a,Ekn(k,n))) for a in range(2^n)])
     return b/2-w/2
-  
