@@ -1,15 +1,23 @@
-## building  CMR WAPB functions from https://link.springer.com/article/10.1007/s10623-018-0579-x
+"""building WAPB functions from https://link.springer.com/article/10.1007/s10623-018-0579-x """
 
-#return the cardinality of the cyclotomic class of 2 modulo 2 n − 1 containing j
 def oj(n,j):
+  """Return the cardinality of the cyclotomic class of 2 modulo 2 n − 1 containing j"""
   return len(Zmod(2^n-1).cyclotomic_cosets(2, cosets=[j])[0])
   
-#return the sum_{i=0}^{k-1} x^(2^i) over the field F
 def my_tr_1(k,x,F):
+  """Returns the sum_{i=0}^{k-1} x^(2^i) over the field F"""
   return F(sum([x^(2^i) for i in range(k)]))
   
-#return random LM  WPB function in n variables 
 def random_LM(n):
+  """Returns a function in n variables sampled uniformly at random from LM family
+
+  Args:
+      n (int): number of variables
+
+  Returns:
+      BooleanFunction: LM-Boolean function in n variables 
+  """
+
   F=GF(2^n, 'z')
   z=F.gen()
   L0=[l[0] for l in Zmod(2^n-1).cyclotomic_cosets(2) if l[0]!=0]
@@ -23,8 +31,24 @@ def random_LM(n):
   f=BooleanFunction(T)
   return f
   
-#return all the LM  WPB function in n variables  
+
 def all_LM(n):
+  """Returns a function in n variables sampled uniformly at random from LM family
+  
+  Args:
+      n (int): number of variables
+
+  Returns:
+      list[BooleanFunction]:  LM family in n variables 
+  
+  Example:
+
+      LM4=all_LM(4)
+      for f in LM4:
+        g=construction_2(4,f)
+        table_fun(g)
+
+  """
   F=GF(2^n, 'z')
   z=F.gen()
   Gamma0=[l[0] for l in Zmod(2^n-1).cyclotomic_cosets(2) if l[0]!=0]
@@ -47,8 +71,11 @@ def all_LM(n):
     alln+=[f]
   return alln
   
-#return a LM function l of Table 4 with nlk list [6,21,27,22,9]  in 8 variables 
+
 def LM8():
+  """Returns a function of LM function with nlk list [6,21,27,22,9] in 8 variables 
+     This is l in Table 4 of https://eprint.iacr.org/2022/1434.pdf
+  """  
   n=8
   F=GF(2^n, 'z')
   z=F.gen()
@@ -66,9 +93,11 @@ def LM8():
   T=[fp(a) for a in F]
   f=BooleanFunction(T)
   return f 
-  
-#return a LM function l0 of Table 4 with nlk list [9,22,27,22,9]  in 8 variables 
+
 def LM8_():
+  """Returns a WPB function, derived from an LM function, with nlk list [9,22,27,22,9] in 8 variables 
+     This is l0 in Table 4 of https://eprint.iacr.org/2022/1434.pdf
+  """    
   f=LM8()
   n=8
   nf= rev_fun(f)
@@ -81,10 +110,3 @@ def LM8_():
     else:
       h+=Ikn(k,n)*nf    
   return h
-  
-"""
-LM4=all_LM(4)
-for f in LM4:
-  g=construction_2(4,f)
-  table_fun(g)
-""" 
