@@ -8,6 +8,8 @@ import  itertools
 prodit=itertools.product
 from multiprocessing import Pool,cpu_count
 from functools import partial
+from random import sample
+
 #value for parlallelisation
 cpu=cpu_count()
 
@@ -20,9 +22,9 @@ load("supp_prop.sage")# indicator functions, supports, verification WPB,WAPB and
 load("nlk.sage")#computing NLk both sequential and parallel 
 load("AI.sage")#compute algebraic immunity using the uppbound n/2 
 
-load("cmr.sage")#building CMR functions
-load("LM-fun.sage")#building LM functions
-load("TL-fun.sage")#building TL functions
+load("others/cmr.sage")#building CMR functions
+load("others/LM-fun.sage")#building LM functions
+load("others/TL-fun.sage")#building TL functions
 
 load("GM22b/constructions_GM22b.sage")#WAPB constuctions from the paper GM22b
 load("GM22b/hybrid16.sage")#building h16 hybrid function

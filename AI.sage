@@ -1,7 +1,19 @@
 def my_algebraic_immunity(f, annihilator = False, verbose = False):
-        g = ~f
-        n=f.nvariables()
-        for i in range(ceil(n/2)):  #see carlet 9.1
+    """Computes the algebraic immunity of a Boolean function
+    Args:
+        f (BooleanFunction): Boolean function
+        annihilator (bool, optional): Return the annihilator space if True. Defaults to False.
+        verbose (bool, optional): Defaults to False.
+
+    Raises:
+        ValueError: Bug notification
+
+    Returns:
+        int : algebraic immunity of f
+    """
+    g = ~f #not F, ie 1 XOR F 
+    n=f.nvariables()
+    for i in range(ceil(n/2)):  #see carlet 9.1
             if verbose : print(i, end=': ')
             for fun in [f, g]:
                 if verbose : print(fun, end=' - ')
@@ -12,6 +24,6 @@ def my_algebraic_immunity(f, annihilator = False, verbose = False):
                     else:
                         return i
                 if verbose :  print("")
-        if verbose : print(ceil(n/2))
-        return(ceil(n/2)) 
-        raise ValueError("you just found a bug!")
+    if verbose : print(ceil(n/2))
+    return(ceil(n/2)) 
+    raise ValueError("you just found a bug!")
