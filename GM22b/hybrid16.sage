@@ -1,6 +1,5 @@
-#return the hybrid Boolean function in 16 variables h_16
-
 def h16():
+  """Return the hybrid Boolean function in 16 variables h_16 of Section 4.3 [GM22b]"""
   f=CMR(16)
   F=LM8()
   G=construction_2(8,F)
