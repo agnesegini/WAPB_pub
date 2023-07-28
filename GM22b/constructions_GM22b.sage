@@ -32,8 +32,6 @@ def construction_1_GM22b(n,f,g):
 
 def construction_2_GM22b(t,f, verbose=False):
   """Secondary construction from a n-variables SWAPB function to one n+t SWAPB function.
-  Let n, t ∈ N ∗ f a n-variable SWAPB functions.
-Output: g an 
 
   Args:
       t (int): number of new variables
