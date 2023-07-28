@@ -1,10 +1,18 @@
+"""
+Plotting results of statistics.
+
+"""
+
+import matplotlib.pyplot as plt
+
+"""Global color name definition"""
 orange=(1,0.5,0)  
 green=(0,0.8,0) 
 blue=(0,0,0.8)
 
 
 
-import matplotlib.pyplot as plt
+
 def plot_dist(L,col=green,title='',fig_name='temp.eps'):
   V=vector(ZZ,L)
   l=len(L)

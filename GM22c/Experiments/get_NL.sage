@@ -21,7 +21,8 @@ def tot_NL(m):
     if file[-1]=='t':
           V+=vector(ZZ,get_NL_from_file(file))      
   return V
-"""   
+  
+"""  
 def table(L,  cols=14):
   V=vector(ZZ,L)
   l=len(L)
@@ -54,10 +55,12 @@ def table(L,  cols=14):
 def propD(L):
   V=vector(ZZ,L)
   l=len(L)
+
   nsamp=sum(V)
   print("sample size: ",nsamp)
   Y=V/float(nsamp)
   expect=sum([i*Y[i] for i in range(l)])
   mode=list(L).index(max(L))
   print(expect, mode)
+
 """  

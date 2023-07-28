@@ -1,19 +1,35 @@
-#!/usr/bin/python3
-## SageMath version 9.5
-#load("main.sage")
-import time
-import numpy as np
+""" 
+Functions to collect data and perform statistics [GM22c]
+
+"""
+
 def randint_par(n):
+  """Return a random integer (refreshing the nonce)"""
   return np.random.RandomState().randint(0,n)
 
 
 def partition(n):
+    """
+    Compute the partition of range(2^n) in slices of integers according to their hamming weight.
+
+    For instance, 
+      > partition(4) 
+      {0: [0], 1: [1, 2, 4, 8], 2: [3, 5, 6, 9, 10, 12], 3: [7, 11, 13, 14], 4: [15]}
+
+
+    Args:
+        n (int): number of variables
+
+    Returns:
+        dict: dictionary P such that P[k] is the set of numbers x in range(2^n) such that hw(x)=k
+    """
     P={}
     for i in range(n+1): P[i]=[]
     for d in range(2^n): P[bin(d).count("1")].append(d)
     return P
     
 def ver_p(n):
+    """Verify correctness of tha function partition(n)"""
     P=partition(n)
     for k in range(n): 
       if len(P[k])!=binomial(n,k): return False
@@ -23,6 +39,14 @@ def it_bal_supp(b):
   return ithp(b,b//2)
 
 def numWPB(m):
+  """Compute the number of WPB functions in 2^m variables
+
+  Args:
+      m (int): _ 2^m is the number of variables
+
+  Returns:
+      int: the number of WPB functions in 2^m variables
+  """  
   n=2^m
   p=1
   for k in range(1,n): 
@@ -31,11 +55,22 @@ def numWPB(m):
   return p
 
 def WPB_iter(m):
+  """Produces an iterator over all the possible supports of WPB functions in 2^m variables"""
   n=2^m
   Lit=[it_bal_supp(binomial(n,k)) for k in range(1,n)]
   return itertools.product(*Lit)
 
 def wpb_from_it(m,S,P):
+    """Returns a WPB function in 2^m variables given
+
+    Args:
+        m (_type_): _description_
+        S (_type_): _description_
+        P (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """    
     n=2^m
     LF=2^n*[0]
     LF[-1]=1
@@ -47,6 +82,7 @@ def wpb_from_it(m,S,P):
     
     
 def stat_NL(m):
+  
   P=partition(2^m)
   W=WPB_iter(m)
   n=2^m
