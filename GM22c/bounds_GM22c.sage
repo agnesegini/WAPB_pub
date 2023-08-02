@@ -28,11 +28,11 @@ def mu_kn(k,m):
       int: mu_kn
   """  
   n=2^m
-  L=[abs(K(k,l+1,n))/2 for l in xrange(n/2)]
+  L=[abs(K(k,l+1,n))/2 for l in range(n/2)]
   return min(L)
    
 def min_list_K(t,n):
-  return min([abs(K(2*t,l+1,n)) for l in xrange(n/2)])
+  return min([abs(K(2*t,l+1,n)) for l in range(n/2)])
   
 def Tl(l,n):
   T=abs(K(n//2,l,n))/2

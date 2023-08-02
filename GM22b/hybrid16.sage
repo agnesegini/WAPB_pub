@@ -2,7 +2,7 @@ def h16():
   """Return the hybrid Boolean function in 16 variables h_16 of Section 4.3 [GM22b]"""
   f=CMR(16)
   F=LM8()
-  G=construction_2(8,F)
+  G=construction_2_GM22b(8,F)
   n=16
   nG= rev_fun(G)
   nf= rev_fun(f)

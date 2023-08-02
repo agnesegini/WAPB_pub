@@ -42,7 +42,7 @@ def numWPB(m):
   """Compute the number of WPB functions in 2^m variables
 
   Args:
-      m (int): _ 2^m is the number of variables
+      m (int):  2^m is the number of variables
 
   Returns:
       int: the number of WPB functions in 2^m variables
@@ -55,7 +55,9 @@ def numWPB(m):
   return p
 
 def WPB_iter(m):
-  """Produces an iterator over all the possible supports of WPB functions in 2^m variables"""
+  """Produces an iterator over all the possible supports of WPB functions in 2^m variables
+  
+  """
   n=2^m
   Lit=[it_bal_supp(binomial(n,k)) for k in range(1,n)]
   return itertools.product(*Lit)
@@ -64,7 +66,7 @@ def wpb_from_it(m,S,P):
     """Returns a WPB function in 2^m variables given
 
     Args:
-        m (_type_): _description_
+        m (int): _description_
         S (_type_): _description_
         P (_type_): _description_
 

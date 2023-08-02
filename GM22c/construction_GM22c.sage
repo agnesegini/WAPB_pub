@@ -111,7 +111,7 @@ def construction1_GM22c(seed,verbose=False):
   N[0]=0
   N[-1]=1
   wpb, t =is_WPB(BooleanFunction(N))
-  flipBooleanFunctionped={ 0: [0], n: [0] }
+  flipped={ 0: [0], n: [0] }
   while not wpb :
     E=Ekn(t,n)
     o=walsh_tr_0(seed,E)//2

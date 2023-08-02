@@ -13,7 +13,15 @@ blue=(0,0,0.8)
 
 
 
-def plot_dist(L,col=green,title='',fig_name='temp.eps'):
+def plot_dist(L,col=green,title='',fig_name='temp'):
+  """Generate barplot from list.
+
+  Args:
+      L (list): list of values, namely L[i]/sum(L)% is the y-axis value of i.
+      col (tuple, optional): color of bars. Defaults to green.
+      title (str, optional): title of the graph. Defaults to ''.
+      fig_name (str, optional): name of the outputfile (.eps automatically included). Defaults to 'temp'.
+  """  
   V=vector(ZZ,L)
   l=len(L)
   nsamp=sum(V)
@@ -23,7 +31,7 @@ def plot_dist(L,col=green,title='',fig_name='temp.eps'):
   #plt.xlim([30000, 40000])
   plt.ylabel('%')
   plt.xlabel('x')
-  plt.savefig( fig_name,format='eps')
+  plt.savefig( fig_name+'.eps',format='eps')
   plt.close()  
   
 

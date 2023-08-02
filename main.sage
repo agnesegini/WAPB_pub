@@ -9,6 +9,9 @@ prodit=itertools.product
 from multiprocessing import Pool,cpu_count
 from functools import partial
 from random import sample
+import time
+import numpy as np
+
 
 #value for parlallelisation
 cpu=cpu_count()
