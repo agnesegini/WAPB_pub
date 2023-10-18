@@ -6,7 +6,7 @@ Computing weightwise nonlinearity on the slices
 ## spherically punctured Reed Muller utilities
 
 def Pkn(k,n):
-  """Retunrs the linear code C over F2, that is a spherically punctured Reed Muller code of order 1 of lenght v=(n choose k)
+  """Returns the linear code C over F2, that is a spherically punctured Reed Muller code of order 1 of lenght v=(n choose k)
 
   Args:
       k (Int)
@@ -44,7 +44,7 @@ def restriction(f,S):
   """Returns the restriction to S of the Boolean function f 
 
   Args:
-      f (BoolanFunction) : a Boolean function in n variables
+      f (BooleanFunction) : a Boolean function in n variables
       S (list[int]): a subset of range(0,2^n)
 
   Returns:
@@ -78,11 +78,11 @@ def dist_all_parallel(C,r):
 
 def NLk(k,f):
     """Returns the weightwise nonlinearity of n-variable f on the slice Ekn, 
-      via computing the distance bewteen the spherically punctured Reed Muller code of order 1 of lenght v=(n choose k)  and the support of the restriction of f over the slide Ekn  as suggested in  https://ia.cr/2022/408
+      via computing the distance between the spherically punctured Reed Muller code of order 1 of lenght v=(n choose k)  and the support of the restriction of f over the slide Ekn  as suggested in  https://ia.cr/2022/408
     
     Args:
         k (int): slice
-        f (BoolanFunction):  n-variable f Boolan function
+        f (BooleanFunction):  n-variable f Boolean function
 
     Returns:
         int: weightwise nonlinearity of n-variable f on the slice Ekn
@@ -106,7 +106,7 @@ def NLk_w(k,f):
 
     Args:
         k (int): slice
-        f (BoolanFunction):  n-variable f Boolan function
+        f (BooleanFunction):  n-variable f Boolan function
 
     Returns:
         int: weightwise nonlinearity of n-variable f on the slice Ekn

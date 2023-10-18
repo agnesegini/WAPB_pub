@@ -24,6 +24,7 @@ def now():
 load("supp_prop.sage")# indicator functions, supports, verification WPB,WAPB and SWAPB
 load("nlk.sage")#computing NLk both sequential and parallel 
 load("AI.sage")#compute algebraic immunity using the uppbound n/2 
+load("AIk.sage")#
 
 load("others/cmr.sage")#building CMR functions
 load("others/LM-fun.sage")#building LM functions

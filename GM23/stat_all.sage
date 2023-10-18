@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ## SageMath version 9.5
-
+"""
 def randint_par(n):
   return np.random.RandomState().randint(0,n)
 
@@ -42,8 +42,25 @@ def wpb_from_it(m,S,P):
       indexk=P[k]
       for j in suppk: LF[indexk[j]]=1
     return  BooleanFunction(LF)
+
+
+def rand_WPB(m,P):
+  n=2^m
+  LF=2^n*[0]
+  LF[-1]=1
+  for k in range(1,n):
+    I=set()
+    indexk=P[k]
+    b=binomial(n,k)
+    while len(I)<b//2:
+      j=randint_par(b)
+      I.add(j)
+      LF[indexk[j]]=1  
+  return BooleanFunction(LF)    
     
-    
+"""
+
+
 def stat_AI(m):
   P=partition(2^m)
   W=WPB_iter(m)
@@ -59,19 +76,7 @@ def stat_AI(m):
     D[Fs.algebraic_normal_form().degree()]+=1
   return AI,NL,D
 
-def rand_WPB(m,P):
-  n=2^m
-  LF=2^n*[0]
-  LF[-1]=1
-  for k in range(1,n):
-    I=set()
-    indexk=P[k]
-    b=binomial(n,k)
-    while len(I)<b//2:
-      j=randint_par(b)
-      I.add(j)
-      LF[indexk[j]]=1  
-  return BooleanFunction(LF)
+
   
 def stat_AI_rand(m,ns=1,verbose=True):
   P=partition(2^m)

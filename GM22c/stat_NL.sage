@@ -56,22 +56,46 @@ def numWPB(m):
 
 def WPB_iter(m):
   """Produces an iterator over all the possible supports of WPB functions in 2^m variables
-  
+    encoded as product of the iterators of the selected subset of the slice. Intended to be used with 
+    partition(m)
+
+    >sage: WPB_iter(2)
+    <itertools.product object at 0x7f8f0e575280>
+    >sage: list(WPB_iter(2))
+    [((0, 1), (0, 1, 2), (0, 1)),
+     ((0, 1), (0, 1, 2), (0, 2)),
+     ((0, 1), (0, 1, 2), (0, 3)),
+     ((0, 1), (0, 1, 2), (1, 2)),
+      ...
   """
   n=2^m
   Lit=[it_bal_supp(binomial(n,k)) for k in range(1,n)]
   return itertools.product(*Lit)
 
-def wpb_from_it(m,S,P):
-    """Returns a WPB function in 2^m variables given
+def wpb_from_it(m,S,P,pedantic=True):
+    """Returns a WPB function in 2^m variables given the support as list of subsets from slice 1 to 2^m-1.
+    
+
+        sage: m=2
+        sage: P=partition(2^m)
+        sage: P
+        {0: [0], 1: [1, 2, 4, 8], 2: [3, 5, 6, 9, 10, 12], 3: [7, 11, 13, 14], 4: [15]}
+        sage: S= ((2, 3), (3, 4, 5), (2, 3))
+        sage: S
+        ((2, 3), (3, 4, 5), (2, 3))
+        sage: wpb_from_it(m,S,P)
+        Boolean function with 4 variables
+        sage: is_WPB(_)
+        (True, True)
 
     Args:
-        m (int): _description_
-        S (_type_): _description_
-        P (_type_): _description_
+        m (int): 2^m number of variables
+        S (tuple/list): subset encoed ad indices of the number in the slices
+        P (dict): output of partition(2^m)
+        pedantic (bool, optional): check if the output is WPB. Defaults to True.
 
     Returns:
-        _type_: _description_
+       BooleanFunction : WPB function with given support
     """    
     n=2^m
     LF=2^n*[0]
@@ -79,23 +103,22 @@ def wpb_from_it(m,S,P):
     for k in range(1,n):
       suppk=S[k-1]
       indexk=P[k]
-      for j in suppk: LF[indexk[j]]=1
-    return  BooleanFunction(LF)
-    
-    
-def stat_NL(m):
-  
-  P=partition(2^m)
-  W=WPB_iter(m)
-  n=2^m
-  NL=2^(n-1)*[0]
-  for s in W: 
-    Fs=wpb_from_it(m,s,P)
-    assert is_WPB(Fs)
-    NL[Fs.nonlinearity()]+=1
-  return NL
+      for j in suppk: LF[indexk[j]]=1  
+    F= BooleanFunction(LF)
+    if pedantic: assert is_WPB(F)[0], "Not WPB!"
+    return  F
+
 
 def rand_WPB(m,P):
+  """Returns a WPB function in 2^m variables sampled uniformly at random
+
+  Args:
+      m (int):  2^m is the number of variables
+      P (dict): it should be =artition(2^m)
+
+  Returns:
+       BooleanFunction : WPB function
+  """
   n=2^m
   LF=2^n*[0]
   LF[-1]=1
@@ -109,6 +132,28 @@ def rand_WPB(m,P):
       LF[indexk[j]]=1  
   return BooleanFunction(LF)
   
+
+    
+def stat_NL(m):
+  """Return the a list L such that L[i] is the number of WPB functions with NL=i
+
+  Args:
+      m (int): 2^m variables
+
+  Returns:
+      list: NL distribution
+  """  
+  P=partition(2^m)
+  W=WPB_iter(m)
+  n=2^m
+  NL=2^(n-1)*[0]
+  for s in W: 
+    Fs=wpb_from_it(m,s,P)
+    assert is_WPB(Fs)
+    NL[Fs.nonlinearity()]+=1
+  return NL
+
+
 def stat_NL_rand(m,ns=10):
   P=partition(2^m)
   n=2^m
